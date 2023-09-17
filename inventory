@@ -6,3 +6,6 @@ catalogue.kpdigital.online
 
 [web]
 web.kpdigital.online
+
+[redis]
+redis.kpdigital.online
