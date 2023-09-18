@@ -1,0 +1,24 @@
+- name: isntall MYSQL component
+  hosts: mysql
+  become: yes
+  tasks:
+  - name: disable current mysql version
+    ansible.builtin.command: yum module disable mysql -y 
+
+  - name: copy mysql repo
+    ansible.builtin.copy:
+      src: mysql.repo
+      dest: /etc/yum.repos.d/mysql.repo
+
+  - name: isntalling MYSQL Community server
+    ansible.builtin.yum:
+      name: mysql-community-server
+      state: installed
+
+  - name: enable and start mysql service
+    ansible.builtin.service:
+      name: mysql
+      state: started
+      enabled: yes
+
+  
