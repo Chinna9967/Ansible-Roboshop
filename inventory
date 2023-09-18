@@ -24,3 +24,6 @@ shipping.kpdigital.online
 
 [rabbitmq]
 rabbitmq.kpdigital.online
+
+[payment]
+payment.kpdigital.online
