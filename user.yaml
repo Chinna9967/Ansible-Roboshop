@@ -27,4 +27,59 @@
     ansible.builtin.user:
       name: roboshop
     when: output.rc != 0
+
+  - name: check /app directory exists or not
+    ansible.builtin.stat:
+      path: /app
+    register: directory
+
+  - name: print directory stat
+    ansible.builtin.debug:
+      msg: "{{directory}}"
+
+  - name: create directory if not exists
+    ansible.builtin.file:
+      path: /app
+      state: directory
+    when: directory.stat.exists = False
+
+  - name: Download the user code
+    ansible.builtin.get_url:
+      url: curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip
+      dest: /tmp
+
+  - name: extract the zip file
+    ansible.builtin.unarchive:
+      src: /tmp/user.zip
+      dest: /app
+      remote_src: yes
+
+  - name: npm dependencies installation
+    ansible.builtin.command: npm install
+    args:
+     chdir: /app
+
+  - name: copying the srvice  file
+    ansible.builtin.copy:
+      src: user.service
+      dest: /etc/systemd/system/user.service
+
+  - name: daemon reload
+    ansible.builtin.reload:
+      daemon_reload: true
+      name: user
+
+  - name: copying mongo repo to yrm.repos.d
+    ansible.builtin.copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongo.repo
+
+  - name: isntalling mondodb cilent shell
+    ansible.builtin.yum:
+      name: mongodb-org-shell
+      state: installed
+
+  - name: Schema load
+    ansible.builtin.command: mongo --host mongodb.kpdigital.online < /app/schema/user.js
+
   
