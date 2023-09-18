@@ -21,3 +21,6 @@ mysql.kpdigital.online
 
 [shipping]
 shipping.kpdigital.online
+
+[rabbitmq]
+rabbitmq.kpdigital.online
