@@ -61,6 +61,6 @@
     ansible.builtin.service:
       name: payment
       state: started
-      enabled: yes 
+      enabled: true
 
   
