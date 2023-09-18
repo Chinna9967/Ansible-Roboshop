@@ -80,6 +80,6 @@
       state: installed
 
   - name: Schema load
-    ansible.builtin.command: mongo --host mongodb.kpdigital.online < /app/schema/user.js
+    ansible.builtin.shell: mongo --host mongodb.kpdigital.online < /app/schema/user.js
 
   
