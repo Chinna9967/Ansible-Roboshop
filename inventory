@@ -9,3 +9,6 @@ web.kpdigital.online
 
 [redis]
 redis.kpdigital.online
+
+[user]
+user.kpdigital.online

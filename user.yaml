@@ -1,0 +1,30 @@
+- name: user setup
+  hosts: user
+  become: yes
+  tasks:
+  - name: nodejs repo setup
+    ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+  - name: installing nodejs
+    ansible.builtin.yum:
+      name: nodejs
+      state: installed
+
+  - name: check user exists or not
+    ansible.builtin.command: id roboshop
+    register: output
+    ignore_errors: true
+
+  - name: print the command output
+    ansible.builtin.debug:
+      msg: "output is : {{output}}"
+
+  - name: print the exit status
+    ansible.builtin.debug:
+      msg: "{{output.rc}}"
+
+  - name: create user if not exist
+    ansible.builtin.user:
+      name: roboshop
+    when: output.rc != 0
+  
