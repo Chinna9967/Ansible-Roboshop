@@ -70,11 +70,11 @@
       name: mysql
       state: installed
 
-   - name: shipping schema load
-     ansible.builtin.command: mysql -h mongodb.kpdigital.online -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+  - name: shipping schema load
+    ansible.builtin.command: mysql -h mongodb.kpdigital.online -uroot -pRoboShop@1 < /app/schema/shipping.sql 
 
-   - name: syatemctl restart 
-     ansible.builtin.service:
+  - name: syatemctl restart 
+    ansible.builtin.service:
       name: shipping
       state: restarted 
 
