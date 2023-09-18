@@ -12,3 +12,6 @@ redis.kpdigital.online
 
 [user]
 user.kpdigital.online
+
+[cart]
+cart.kpdigital.online
