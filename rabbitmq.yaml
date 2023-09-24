@@ -27,3 +27,7 @@
 
   - name: create rabbitmq user
     ansible.builtin.shell: rabbitmqctl add_user roboshop roboshop123
+
+  - name: setup permissionss
+    ansible.builtin.shell: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+    
